@@ -17,7 +17,8 @@ server.tool(
     sig: z.string().optional().describe("Function signature to call (default: 'run()')"),
     rpcUrl: z.string().optional().describe("JSON-RPC URL (default: http://localhost:8545)"),
     broadcast: z.boolean().optional().describe("Broadcast the transactions"),
-    verify: z.boolean().optional().describe("Verify the contract on Etherscan (needs API key)")
+    // verify: z.boolean().optional().describe("Verify the contract on Etherscan (needs API key)")
+    verify: z.boolean().optional().describe("Verify the contract on Blockscout")
   },
   async ({ scriptPath, sig = "run()", rpcUrl, broadcast = false, verify = false }) => {
     const installed = await checkFoundryInstalled();

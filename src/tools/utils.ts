@@ -130,3 +130,72 @@ server.tool(
     };
   }
 );
+
+// server.tool(
+//   "estimate_gas",
+//   "Estimate the gas cost of a transaction",
+//   {
+//     to: z.string().describe("Recipient address"),
+//     functionSignature: z.string().describe("Function signature (e.g., 'transfer(address,uint256)')"),
+//     args: z.array(z.string()).optional().describe("Function arguments"),
+//     value: z.string().optional().describe("Ether value to send with the transaction (in wei)"),
+//     rpcUrl: z.string().optional().describe("JSON-RPC URL (default: http://localhost:8545)")
+//   },
+//   async ({ to, functionSignature, args = [], value, rpcUrl }) => {
+//     const installed = await checkFoundryInstalled();
+//     if (!installed) {
+//       return {
+//         content: [{ type: "text", text: FOUNDRY_NOT_INSTALLED_ERROR }],
+//         isError: true
+//       };
+//     }
+
+//     const resolvedRpcUrl = await resolveRpcUrl(rpcUrl);
+//     let command = `${castPath} estimate ${to} "${functionSignature}"`;
+    
+//     if (args.length > 0) {
+//       command += " " + args.join(" ");
+//     }
+    
+//     if (value) {
+//       command += ` --value ${value}`;
+//     }
+    
+//     if (resolvedRpcUrl) {
+//       command += ` --rpc-url "${resolvedRpcUrl}"`;
+//     }
+    
+//     const result = await executeCommand(command);
+//     const gasEstimate = result.message.trim();
+    
+//     // Get current gas price to calculate cost in ETH
+//     let gasPriceInfo = "";
+//     try {
+//       const gasPriceCommand = `${castPath} gas-price --rpc-url "${resolvedRpcUrl}"`;
+//       const gasPriceResult = await executeCommand(gasPriceCommand);
+//       if (gasPriceResult.success) {
+//         const gasPrice = gasPriceResult.message.trim();
+//         const cost = BigInt(gasEstimate) * BigInt(gasPrice);
+        
+//         // Convert wei to ETH
+//         const ethCommand = `${castPath} from-wei ${cost}`;
+//         const ethResult = await executeCommand(ethCommand);
+//         if (ethResult.success) {
+//           gasPriceInfo = `\nGas Price: ${gasPrice} wei\nEstimated Cost: ${ethResult.message.trim()} ETH`;
+//         }
+//       }
+//     } catch (error) {
+//       console.error("Error getting gas price:", error);
+//     }
+    
+//     return {
+//       content: [{ 
+//         type: "text", 
+//         text: result.success 
+//           ? `Estimated gas for calling ${functionSignature} on ${to}: ${gasEstimate} gas units${gasPriceInfo}` 
+//           : `Gas estimation failed: ${result.message}` 
+//       }],
+//       isError: !result.success
+//     };
+//   }
+// );

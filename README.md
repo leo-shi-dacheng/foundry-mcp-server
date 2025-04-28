@@ -75,13 +75,14 @@ The server is designed to be used as an MCP tool provider for MCP Clients. When 
 
 ```json
  "mcpServers": {
-    "foundry": {
+    "foundry-mcp-server": {
       "command": "node",
       "args": [
         "path/to/foundry-mcp-server/dist/index.js"
       ],
       "env" :{
         "PRIVATE_KEY": "0x1234",
+        "RPC_URL": "https://mainnet.hsk.xyz",
       }
     }
  }
@@ -101,9 +102,6 @@ The server supports the following environment variables:
 - `RPC_URL`: Default RPC URL to use when none is specified (optional)
 - `PRIVATE_KEY`: Private key to use for transactions (optional)
 
-> [!CAUTION]
-> Do not add keys with mainnet funds. Even though the code uses it safely, LLMs can hallicunate and send malicious transactions. 
-> Use it only for testing/development purposes. DO NOT trust the LLM!!
 
 ### Workspace
 
@@ -129,6 +127,9 @@ The server maintains a persistent Forge workspace at `~/.mcp-foundry-workspace` 
 - `cast_sig`: Get the selector for a function or event signature
 - `cast_4byte`: Lookup function or event signature from the 4byte directory
 - `cast_chain`: Get information about the current chain
+- `cast_trace`: Trace a transaction and analyze its call stack with function signature matching
+- `cast_4byte_from_file`: Match function selectors with signatures from a local file
+- `analyze_transaction_trace`: Analyze a transaction trace and identify function calls from both online and local sources
 
 ### Forge
 
@@ -161,7 +162,7 @@ Now claude will have complete access to the foundry-mcp server. If you insert th
 1. **Transaction analysis**:
 ```
 Can you analyze the transaction and explain what it does? 
-https://etherscan.io/tx/0xcb73ad3116f19358e2e649d4dc801b7ae0590a47b8bb2e57a8e98b6daa5fb14b
+https://hashkey.blockscout.com/tx/0x09860abb48e161918a84cb4b39e74afbd21dcf1851fb2197e8c7892d2b78bdfd
 ```
 
 2. **Querying Balances**:
@@ -182,6 +183,7 @@ Deploy a mock ERC20 contract to a local anvil instance and name it "Fire Coin".
 ## Acknowledgments ✨
 
 - [Model Context Protocol](https://modelcontextprotocol.io) for the MCP specification
+- [Anthropic](https://anthropic.com) for Claude Desktop
 - [Anthropic](https://anthropic.com) for Claude Desktop
 
 ## Disclaimer
