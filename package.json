@@ -1,8 +1,23 @@
 {
   "name": "foundry-mcp-server",
+  "version": "0.0.1",
+  "description": "A simple, lightweight and fast MCP (Model Context Protocol) server that provides Solidity development capabilities using the Foundry toolchain (Forge, Cast, and Anvil)",
+  "author": "leo.shi",
+  "license": "MIT",
   "module": "src/index.ts",
   "type": "module",
   "main": "src/index.ts",
+  "keywords": [
+    "model",
+    "context",
+    "protocol",
+    "server",
+    "mcp",
+    "foundry",
+    "anvil",
+    "forge",
+    "cast"
+  ],
   "scripts": {
     "build": "bun build ./src/index.ts --outdir ./dist --target node",
     "start": "bun run src/index.ts",
@@ -16,6 +31,5 @@
     "@modelcontextprotocol/sdk": "^1.7.0",
     "dotenv": "^16.4.7",
     "zod": "^3.24.2"
-  },
-  "private": true
+  }
 }
